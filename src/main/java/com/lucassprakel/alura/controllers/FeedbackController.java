@@ -75,7 +75,7 @@ public class FeedbackController {
         String instructorEmail = instructor.getEmail();
 
 
-        // Send an email to the instructor if the rating is less than or equal to 6
+        // Send an email to the instructor if the rating is less than 6
         if (rating < 6) {
             String subject = "Course feedback " + course.getCode();
             String body = "Your course " + course.getName() + " received feedback with a rating of " + rating
@@ -101,6 +101,21 @@ public class FeedbackController {
             // Atualiza os campos do feedback existente com os valores fornecidos no feedback atualizado
             existingFeedback.setRating(updatedFeedback.getRating());
             existingFeedback.setFeedback(updatedFeedback.getFeedback());
+
+            Course course = courseRepository.findByCode(courseCode);
+
+            //  Gets the instructor's email
+            String instructorUsername = course.getInstructor();
+            Users instructor = usersRepository.findByUsername(instructorUsername);
+            String instructorEmail = instructor.getEmail();
+
+            // Send an email to the instructor if the rating is less than 6
+            if (existingFeedback.getRating() < 6) {
+                String subject = "Course feedback " + course.getCode();
+                String body = "Your course " + course.getName() + " received feedback with a rating of " + existingFeedback.getRating()
+                        + ". Reason: " + existingFeedback.getFeedback();
+                EmailSender.send(instructorEmail, subject, body);
+            }
 
             // Salva o feedback atualizado no banco de dados
             feedbackRepository.save(existingFeedback);
