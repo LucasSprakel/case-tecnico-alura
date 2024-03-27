@@ -98,6 +98,62 @@ Endpoint("/registrations")
 
 
 
+<br>
+<br>
+
+**POST feedback:**
+
+Endpoint("/feedback")
+
+Atributos do BODY:
+- username (username cadastrado)
+- courseCode (codigo de curso cadastrado e ativado)
+- rating (valores entre 0 e 10)
+- feedback
+
+É verificado se o usuario já possui um feedback feito nesse mesmo curso.
+Envia um email para o instrutor caso o rating seja menor que 6
+
+![postFeedback](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/e4fcf7ae-e8fb-4b06-b7eb-373d91d2ddb2)
+
+
+**GET todos os feedbacks:**
+
+Endpoint("/feedbacks")
+
+![getFeedbacks](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/8d0763b7-d1f4-4d06-8d45-1f62b89c8edb)
+
+
+
+**PUT feedback:**
+
+Endpoint("/feedback")
+
+Atributos do BODY:
+- username (username cadastrado)
+- courseCode (codigo de curso cadastrado e ativado)
+- rating (valores entre 0 e 10)
+- feedback
+
+Envia um email para o instrutor caso o rating seja menor que 6
+
+![putFeedback](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/c71d9ac8-2023-4a0f-bffe-f56dafd228ea)
+
+
+**GET relatorio NPS:**
+
+Endpoint("/report")
+Mostra o NET PROMOTER SCORE de cursos que possuem pelo menos 4 matriculas
+
+![getRelatorioNPS](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/d2a03912-55c1-4c48-ad39-2c3aa19f1892)
+
+
+
+
+
+
+
+
 
 
 
