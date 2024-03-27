@@ -77,6 +77,32 @@ Atributos obrigatórios do Path:
 ![putDesativarCourse](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/e0d0a431-ee2b-4a9f-a7d0-b68237be3f9d)
 
 
+<br>
+<br>
+
+**POST registration:**
+
+Endpoint("/registration")
+
+Atributos do BODY:
+- username (username cadastrado)
+- courseCode (codigo de curso cadastrado e ativado)
+
+![postRegistration](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/fdb27ab4-77b7-4637-a5cb-0cef1d080866)
+
+**GET todos os registrations:**
+
+Endpoint("/registrations")
+
+![getRegistrations](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/aa6f3b85-f116-49d5-94ff-e261bc7af09e)
+
+
+
+
+
+
+
+
 
 
 
