@@ -40,13 +40,11 @@ public class RegistrationController {
         String username = registration.getUsername();
         String courseCode = registration.getCourseCode();
 
-        // Checks if the user exists
         if (!usersRepository.existsByUsername(username)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("User not found: " + username);
         }
 
-        // Check if the course exists
         if (!courseRepository.existsByCode(courseCode)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Course not found: " + courseCode);
@@ -59,7 +57,6 @@ public class RegistrationController {
                     .body("Course " + courseCode + " is not Active.");
         }
 
-        // Checks if the user is already enrolled in the course
         if (registrationRepository.existsByUsernameAndCourseCode(username, courseCode)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("User " + username + " already enrolled in the course " + courseCode);

@@ -54,12 +54,10 @@ public class CourseController {
         course.setStatus("Active");
 
 
-        // Checking whether the course code has only letters, no spaces, no numeric characters or no special characters, but can be separated by -
         if (!courseRepository.isValidCode(course.getCode())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid code. Must contain only letters and -, and a maximum of 10 characters (Ex: alura-java).");
         }
 
-        // Check if a course with this code already exists
         if (courseRepository.existsByCode(course.getCode())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is already a course with this code.");
         }
@@ -67,7 +65,6 @@ public class CourseController {
         String instructorUsername = course.getInstructor().toLowerCase();
         Users instructor = usersRepository.findByUsername(instructorUsername);
 
-        // Check if instructor exists and has the role INSTRUCTOR
         if (instructor == null || !instructor.getRole().equals("INSTRUCTOR")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Only instructor users can create courses.");
         }
@@ -85,7 +82,7 @@ public class CourseController {
         }
 
         Course course = courseRepository.findByCode(code);
-        // Desabilitar o curso aqui (por exemplo, atualizar o status)
+
         course.setStatus("Inactive");
         course.setInactivationDate(LocalDateTime.now());
         courseRepository.save(course);

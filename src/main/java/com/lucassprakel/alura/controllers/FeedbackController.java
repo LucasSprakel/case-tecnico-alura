@@ -48,19 +48,16 @@ public class FeedbackController {
         int rating = feedbackRequest.getRating();
         String feedback = feedbackRequest.getFeedback();
 
-        // Check if the user is enrolled in the course
         if (!registrationRepository.existsByUsernameAndCourseCode(username, courseCode)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("User " + username + " is not registered for the course " + courseCode);
         }
 
-        // Check if the user has already submitted feedback for this course
         if (feedbackRepository.existsByUsernameAndCourseCode(username, courseCode)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("User " + username + " has already submitted feedback for the course " + courseCode);
         }
 
-        // Verifica se a nota está entre 0 e 10
         if (rating < 0 || rating > 10) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Rating must be between 0 and 10.");
@@ -69,13 +66,11 @@ public class FeedbackController {
         Course course = courseRepository.findByCode(courseCode);
 
 
-        //  Gets the instructor's email
         String instructorUsername = course.getInstructor();
         Users instructor = usersRepository.findByUsername(instructorUsername);
         String instructorEmail = instructor.getEmail();
 
 
-        // Send an email to the instructor if the rating is less than 6
         if (rating < 6) {
             String subject = "Course feedback " + course.getCode();
             String body = "Your course " + course.getName() + " received feedback with a rating of " + rating
@@ -93,23 +88,18 @@ public class FeedbackController {
         String username = updatedFeedback.getUsername();
         String courseCode = updatedFeedback.getCourseCode();
         
-        // Verifica se já existe um feedback para o mesmo usuário e curso
         if (feedbackRepository.existsByUsernameAndCourseCode(username, courseCode)) {
-            // Obtém o feedback existente pelo username e courseCode
             Feedback existingFeedback = feedbackRepository.findByUsernameAndCourseCode(username, courseCode);
             
-            // Atualiza os campos do feedback existente com os valores fornecidos no feedback atualizado
             existingFeedback.setRating(updatedFeedback.getRating());
             existingFeedback.setFeedback(updatedFeedback.getFeedback());
 
             Course course = courseRepository.findByCode(courseCode);
 
-            //  Gets the instructor's email
             String instructorUsername = course.getInstructor();
             Users instructor = usersRepository.findByUsername(instructorUsername);
             String instructorEmail = instructor.getEmail();
 
-            // Send an email to the instructor if the rating is less than 6
             if (existingFeedback.getRating() < 6) {
                 String subject = "Course feedback " + course.getCode();
                 String body = "Your course " + course.getName() + " received feedback with a rating of " + existingFeedback.getRating()
@@ -117,7 +107,6 @@ public class FeedbackController {
                 EmailSender.send(instructorEmail, subject, body);
             }
 
-            // Salva o feedback atualizado no banco de dados
             feedbackRepository.save(existingFeedback);
 
             return ResponseEntity.status(HttpStatus.OK).body("Feedback for user " + username + " and course " + courseCode + " updated successfully.");
