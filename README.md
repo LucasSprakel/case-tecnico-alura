@@ -12,7 +12,7 @@ Endpoint("/user")
 
 Atributos do BODY:
 - name
-- username (apenas caracteres minúsculos, sem numerais e sem espaços)
+- username (20 caracteres no máximo)(apenas caracteres minúsculos, sem numerais e sem espaços)
 - email (endereço de email em formato válido)
 - password
 - role (Só pode ser "STUDENT", "INSTRUCTOR" ou "ADMIN")
@@ -35,6 +35,54 @@ Response:
 - role
 
 ![getUser](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/2a921585-43d5-4091-b99a-5d5a3c46e23c)
+
+<br>
+<br>
+
+**POST course:**
+
+Endpoint("/course")
+
+Atributos do BODY:
+- name
+- code (10 caracteres no máximo)(deve ser textual, sem espaços, nem caracteres numéricos e nem caracteres especiais, mas pode ser separado por - , exemplo: alura-java)
+- instructor (Deve ser um username cadastrado com role "INSTRUCTOR")
+- description
+
+![postCourse](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/a847dbdd-bd27-4b59-a389-c9eb573b3a0e)
+
+
+**GET course by Status:**
+
+Endpoint("/courses")
+
+Atributos não obrigatórios do Path:
+- status
+- page (Default: 0)
+- size (default: 10)
+
+Endpoint com atributos("/courses?status=Active&page=0&size=1")
+Nesse exemplo é retornado apenas os cursos Ativos da primeira página, cada página contendo apenas um curso
+
+![getCoursebyStatus](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/8deaafbb-f99c-44af-80b0-5ea50fd879a3)
+
+
+**PUT desativar course:**
+
+Endpoint("/course/{code}/disable")
+
+Atributos obrigatórios do Path:
+- code (Código de um curso já criado)
+
+![putDesativarCourse](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/e0d0a431-ee2b-4a9f-a7d0-b68237be3f9d)
+
+
+
+
+
+
+
+
 
 
 
