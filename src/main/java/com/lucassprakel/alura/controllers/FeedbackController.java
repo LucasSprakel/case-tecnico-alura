@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lucassprakel.alura.feedback.EmailSender;
 import com.lucassprakel.alura.models.Course;
 import com.lucassprakel.alura.models.Feedback;
-import com.lucassprakel.alura.models.Registration;
 import com.lucassprakel.alura.models.Users;
 import com.lucassprakel.alura.repositories.CourseRepository;
 import com.lucassprakel.alura.repositories.FeedbackRepository;
 import com.lucassprakel.alura.repositories.RegistrationRepository;
 import com.lucassprakel.alura.repositories.UsersRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

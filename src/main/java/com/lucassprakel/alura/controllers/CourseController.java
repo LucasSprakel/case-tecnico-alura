@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 
 @RestController
 public class CourseController {
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
     private final UsersRepository usersRepository;
 
 
