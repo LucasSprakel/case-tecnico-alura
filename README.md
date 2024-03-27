@@ -148,7 +148,10 @@ Mostra o NET PROMOTER SCORE de cursos que possuem pelo menos 4 matriculas
 ![getRelatorioNPS](https://github.com/LucasSprakel/case-tecnico-alura/assets/53552116/d2a03912-55c1-4c48-ad39-2c3aa19f1892)
 
 
+# Tests
 
+No caso de usar os tests criados na pasta test ao invés do POSTMAN, ter cuidado com os argumentos passados.
+Por exemplo: no caso de fazer um post User e criar um usuário com um username que já existe, o test vai retornar um Exception falando que foi um BadRequest(400)
 
 
 
